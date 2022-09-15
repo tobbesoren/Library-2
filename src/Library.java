@@ -1,19 +1,24 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 public class Library {
-    private ArrayList<Book> bookList = new ArrayList<>();
-    private final Scanner sc = new Scanner(System.in);
+    private ArrayList<Book> bookList = new ArrayList<>(); // Holds the Books!
+    private final Scanner sc = new Scanner(System.in); // A scanner object to read user input.
 
     public Library() {
+        // A most minimal constructor...
+        // Books need to be added manually
     }
 
     public Library(ArrayList<Book> bookList) {
+        // an alternative constructor. Use it to add an ArrayList of Book objects to the new Library instance.
         this.bookList = bookList;
     }
 
     public boolean menu(){
+        /* A meny for the Library object. Returns true if the menu should run again, and false if the user chooses to
+        exit the program.
+         */
 
         int menyChoice;
         System.out.println("""
@@ -25,7 +30,8 @@ public class Library {
                 6. Quit
                 """);
 
-        menyChoice = sc.nextInt();
+        menyChoice = sc.nextInt(); // the scanner object is used to get input from user. No error handling; the user
+        // better be entering valid menu choices or the program will crash! Maybe I'll fix that...
         sc.nextLine();
         switch (menyChoice) {
             case 1 -> {
@@ -44,7 +50,7 @@ public class Library {
                 returnBook();
             }
             case 6 -> {
-                quit();
+
                 return false;
             }
 
@@ -53,6 +59,8 @@ public class Library {
     }
 
     public void addNewBook() {
+        // Gets user input to create new Book object and adds it to the Library
+
         System.out.println("What is the title?");
         String title = sc.nextLine();
 
@@ -71,12 +79,13 @@ public class Library {
     }
 
     public void addToBookList(Book book) {
+        // can be used to add a previously created Book to the Library.
         bookList.add(book);
     }
 
-
-
     public void searchBook() {
+        // Lets the user search for a book, and, if found, lets them try to loan() it. This will succeed if the book is
+        // available, otherwise the user will be told that the book is unavailable.
 
         String bookTitle;
         String menuChoice;
@@ -103,6 +112,8 @@ public class Library {
     }
 
     public void listAvailableBooks() {
+        // Lists all Books that aren't loaned. Uses, implicitly, toString().
+        // If there are no available books, the user is told so.
         if(bookList.size() == 0){
             System.out.println("There are no available books in the library");
         }
@@ -114,12 +125,15 @@ public class Library {
     }
 
     public void listAllBooks() {
+        // Simply prints all books, available or not.
         for(Book book: bookList) {
             System.out.println(book);
         }
     }
 
     public void returnBook() {
+        // Lets the user return a loaned book. If the book isn't loaned, the user will be told so. If the book doesn't
+        // exist in the library, the user will be told so.
         String bookTitle;
 
         System.out.println("Enter the title of the book you want to return.");
@@ -137,10 +151,6 @@ public class Library {
         }
         System.out.println("The book is not in the catalogue.");
 
-    }
-
-    static void quit() {
-        System.exit(0);
     }
 }
 
