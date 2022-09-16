@@ -50,7 +50,6 @@ public class Library {
                 returnBook();
             }
             case 6 -> {
-
                 return false;
             }
 
